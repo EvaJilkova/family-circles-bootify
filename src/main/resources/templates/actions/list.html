@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{actions.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{actions.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/actionss/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{actions.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${actionses.empty}">[[#{actions.list.empty}]]</div>
+            <div th:if="${!actionses.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left p-2">[[#{actions.actionsId.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{actions.actionId.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{actions.locationId.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{actions.userId.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="actions : ${actionses}" class="odd:bg-gray-100">
+                            <td class="p-2">[[${actions.actionsId}]]</td>
+                            <td class="p-2">[[${actions.actionId}]]</td>
+                            <td class="p-2">[[${actions.locationId}]]</td>
+                            <td class="p-2">[[${actions.userId}]]</td>
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/actionss/edit/{actionsId}(actionsId=${actions.actionsId})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{actions.list.edit}]]</a>
+                                    <form th:action="@{/actionss/delete/{actionsId}(actionsId=${actions.actionsId})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{actions.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

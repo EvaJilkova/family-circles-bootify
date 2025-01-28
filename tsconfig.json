@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "outDir": "./target/classes/static/out-tsc",
+    "removeComments": true,
+    "target": "ES5",
+    "baseUrl": "src/main/resources",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "paths": {},
+    "sourceMap": true,
+    "alwaysStrict": true,
+    "allowUnreachableCode": false,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "exclude": [
+    "node_modules/**/*",
+    "**/build/**/*",
+    "**/out/**/*"
+  ]
+}

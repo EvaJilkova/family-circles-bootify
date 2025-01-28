@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{item.edit.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{item.edit.headline}]]</h1>
+                <div>
+                    <a th:href="@{/items}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-4 rounded px-5 py-2">[[#{item.edit.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('item')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='item', field='itemId', disabled=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='item', field='itemName', required=true)}" />
+                <div th:replace="~{fragments/forms::inputRow(object='item', field='categoryId', type='select')}" />
+                <input type="submit" th:value="#{item.edit.headline}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2 mt-6" />
+            </form>
+        </div>
+    </body>
+</html>

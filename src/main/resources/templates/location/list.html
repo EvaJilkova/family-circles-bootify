@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{location.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="flex flex-wrap mb-6">
+                <h1 class="grow text-3xl md:text-4xl font-medium mb-2">[[#{location.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/locations/add}" class="inline-block text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-300  focus:ring-4 rounded px-5 py-2">[[#{location.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${locations.empty}">[[#{location.list.empty}]]</div>
+            <div th:if="${!locations.empty}" class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-left p-2">[[#{location.locationId.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{location.street.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{location.streetNumber.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{location.postalCode.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{location.city.label}]]</th>
+                            <th scope="col" class="text-left p-2">[[#{location.countryId.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-t-2 border-black">
+                        <tr th:each="location : ${locations}" class="odd:bg-gray-100">
+                            <td class="p-2">[[${location.locationId}]]</td>
+                            <td class="p-2">[[${location.street}]]</td>
+                            <td class="p-2">[[${location.streetNumber}]]</td>
+                            <td class="p-2">[[${location.postalCode}]]</td>
+                            <td class="p-2">[[${location.city}]]</td>
+                            <td class="p-2">[[${location.countryId}]]</td>
+                            <td class="p-2">
+                                <div class="float-right whitespace-nowrap">
+                                    <a th:href="@{/locations/edit/{locationId}(locationId=${location.locationId})}" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{location.list.edit}]]</a>
+                                    <form th:action="@{/locations/delete/{locationId}(locationId=${location.locationId})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="inline">
+                                        <button type="submit" class="inline-block text-white bg-gray-500 hover:bg-gray-600 focus:ring-gray-200 focus:ring-3 rounded px-2.5 py-1.5 text-sm">[[#{location.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
